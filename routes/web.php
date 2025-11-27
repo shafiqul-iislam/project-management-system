@@ -7,10 +7,6 @@ Route::get('/', function () {
 });
 
 
-// Route::get('/index', function () {
-//     return view('admin.pages.index');
-// });
-
 Route::get('/admin/dashboard', function () {
     return view('admin.pages.dashboard');
 });

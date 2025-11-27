@@ -13,21 +13,31 @@
         <a href="#" class="flex items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-primary transition-colors">
             <i class="ri-home-5-line text-xl"></i>
             <span class="font-medium">Dashboard</span>
-        </a>
-
-        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
-            <i class="ri-shopping-bag-3-line text-xl"></i>
-            <span class="font-medium">Orders</span>
-        </a>
+        </a>        
 
         <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
             <i class="ri-user-3-line text-xl"></i>
-            <span class="font-medium">Customers</span>
+            <span class="font-medium">Manage Users</span>
+        </a>
+
+        <a href="{{ url('admin/projects') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+            <i class="ri-shopping-bag-3-line text-xl"></i>
+            <span class="font-medium">Manage Projects</span>
         </a>
 
         <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
             <i class="ri-bar-chart-box-line text-xl"></i>
-            <span class="font-medium">Analytics</span>
+            <span class="font-medium">Manage Tasks</span>
+        </a>
+
+        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+            <i class="ri-bar-chart-box-line text-xl"></i>
+            <span class="font-medium">Developers</span>
+        </a>
+
+        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+            <i class="ri-bar-chart-box-line text-xl"></i>
+            <span class="font-medium">Reports</span>
         </a>
 
         <p class="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-8 mb-2">Settings</p>
