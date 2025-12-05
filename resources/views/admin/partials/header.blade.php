@@ -35,7 +35,10 @@
                  <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">Your Profile</a>
                  <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">Settings</a>
                  <div class="border-t border-slate-100 my-1"></div>
-                 <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Sign out</a>
+                 <form action="{{ route('admin.logout') }}" class="w-full" method="post">
+                     @csrf
+                     <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Sign out</button>
+                 </form>
              </div>
          </div>
      </div>

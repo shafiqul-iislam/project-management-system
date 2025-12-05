@@ -44,16 +44,14 @@
                 <p class="text-slate-500 text-sm mt-1">Sign in to access your dashboard</p>
             </div>
 
-            <form action="{{ url('admin/login') }}" method="POST" class="space-y-6">
-                @csrf
-
+            <form id="login-form" class="space-y-6">
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="ri-mail-line text-slate-400"></i>
                         </div>
-                        <input type="email" name="email" required
+                        <input type="email" id="email" name="email" required
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
                             placeholder="name@company.com">
                     </div>
@@ -69,7 +67,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="ri-lock-line text-slate-400"></i>
                         </div>
-                        <input type="password" name="password" required
+                        <input type="password" id="password" name="password" required
                             class="block w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
                             placeholder="••••••••">
                         <button type="button"
@@ -115,11 +113,15 @@
                     </button>
                 </div>
             </div>
+
+            <p class="mt-8 text-center text-sm text-slate-500">
+                Don't have an account?
+                <a href="signup.html" class="font-medium text-primary hover:text-primary/80 transition-colors">Sign up for free</a>
+            </p>
         </div>
     </div>
 
     <script src="js/auth/auth.js"></script>
 </body>
-
 
 </html>
