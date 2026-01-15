@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Middleware\AdminAuthMiddleware;
 
 Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
@@ -13,4 +14,7 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.pages.dashboard');
     })->name('dashboard');
+
+    Route::resource('projects', ProjectController::class);
+
 });

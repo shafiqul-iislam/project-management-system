@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'completed', 'active'])->default('pending');
-            $table->timestamp('started_at')->nullable();
-            $table->timestamp('ended_at')->nullable();// deadline
-            $table->timestamp('finished_at')->nullable();
+            $table->date('started_at')->nullable();
+            $table->date('ended_at')->nullable();
+            $table->date('finished_at')->nullable();
             $table->string('created_by_username')->nullable();
             $table->timestamps();
         });

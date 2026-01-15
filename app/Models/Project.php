@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'status',
+        'started_at',
+        'ended_at',
+        'finished_at',
+        'created_by_username',
+    ];
 
     public function users()
     {
