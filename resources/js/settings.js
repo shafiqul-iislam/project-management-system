@@ -1,4 +1,6 @@
-$(document).ready(function () {
+import $ from 'jquery';
+
+$(function () {
     // Tab Switching Logic
     function switchTab(tabId) {
         // Update Tab Buttons
@@ -27,18 +29,5 @@ $(document).ready(function () {
         switchTab(tabParam);
     }
 
-    // Mock Form Submission
-    $('.save-btn').click(function () {
-        const btn = $(this);
-        const originalText = btn.text();
 
-        // Show loading state
-        btn.prop('disabled', true).html('<i class="ri-loader-4-line animate-spin"></i> Saving...');
-
-        // Simulate API call
-        setTimeout(function () {
-            btn.prop('disabled', false).text(originalText);
-            alert('Settings saved successfully! (Mock Action)');
-        }, 1000);
-    });
 });
