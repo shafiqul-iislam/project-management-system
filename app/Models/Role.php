@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $fillable = [
+        'name',
+        'slug',
+        'role_type',
+        'description',
+        'permissions',
+    ];
+
+    protected $casts = [
+        'permissions' => 'array',
+    ];
+
     protected $guarded = [];
 
     public function users()

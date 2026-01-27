@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Role::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->enum('profile_type', ['admin', 'project_manager', 'staff'])->default('admin'); // 1 = admin, 2 = project manager, 3 =  staff
             $table->string('status')->default('active');
             $table->rememberToken();
             $table->timestamps();

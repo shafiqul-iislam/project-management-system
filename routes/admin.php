@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TaskController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\DeveloperController;
@@ -19,6 +22,10 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
 
     Route::resource('projects', ProjectController::class);
     Route::resource('developers', DeveloperController::class);
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('tasks', TaskController::class);
 
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('settings/general', [SettingsController::class, 'updateGeneralSettings'])->name('settings.general');

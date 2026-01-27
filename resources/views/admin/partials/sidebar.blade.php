@@ -15,12 +15,12 @@
             <span class="font-medium">Dashboard</span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+        <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
             <i class="ri-user-3-line text-xl"></i>
             <span class="font-medium">Manage Users</span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+        <a href="{{ route('admin.roles.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
             <i class="ri-user-3-line text-xl"></i>
             <span class="font-medium">Manage Roles</span>
         </a>
@@ -30,7 +30,7 @@
             <span class="font-medium">Manage Projects</span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+        <a href="{{ route('admin.tasks.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
             <i class="ri-bar-chart-box-line text-xl"></i>
             <span class="font-medium">Manage Tasks</span>
         </a>
