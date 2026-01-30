@@ -10,7 +10,7 @@
     <nav class="px-4 py-6 space-y-1 overflow-y-auto h-[calc(100vh-4rem)]">
         <p class="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Menu</p>
 
-        <a href="/" class="flex items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-primary transition-colors">
+        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-primary transition-colors">
             <i class="ri-home-5-line text-xl"></i>
             <span class="font-medium">Dashboard</span>
         </a>

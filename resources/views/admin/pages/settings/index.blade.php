@@ -24,6 +24,11 @@
                 </button>
                 <button
                     class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 border-transparent text-slate-500 font-medium text-sm hover:text-slate-700 hover:border-slate-300 transition-all"
+                    data-tab="email">
+                    Email Settings
+                </button>
+                <button
+                    class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 border-transparent text-slate-500 font-medium text-sm hover:text-slate-700 hover:border-slate-300 transition-all"
                     data-tab="notifications">
                     Notifications
                 </button>
@@ -114,6 +119,64 @@
                     <div class="pt-4 flex justify-end">
                         <button type="submit"
                             class="save-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">Update Password</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Email Settings -->
+            <div id="email-tab" class="tab-content hidden space-y-6">
+                <h2 class="text-lg font-medium text-slate-900">Email Configuration</h2>
+                <form action="{{ route('admin.settings.email') }}" method="POST">
+                    @csrf
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="mail_mailer" class="block text-sm font-medium text-slate-700">Mail Driver</label>
+                            <input type="text" name="mail_mailer" id="mail_mailer" value="{{ $settings['mail_mailer'] ?? 'smtp' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_host" class="block text-sm font-medium text-slate-700">Mail Host</label>
+                            <input type="text" name="mail_host" id="mail_host" value="{{ $settings['mail_host'] ?? 'smtp.gmail.com' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_port" class="block text-sm font-medium text-slate-700">Mail Port</label>
+                            <input type="number" name="mail_port" id="mail_port" value="{{ $settings['mail_port'] ?? '587' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_username" class="block text-sm font-medium text-slate-700">Mail Username</label>
+                            <input type="text" name="mail_username" id="mail_username" value="{{ $settings['mail_username'] ?? '' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_password" class="block text-sm font-medium text-slate-700">Mail Password</label>
+                            <input type="password" name="mail_password" id="mail_password" value="{{ $settings['mail_password'] ?? '' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_encryption" class="block text-sm font-medium text-slate-700">Mail Encryption</label>
+                            <select name="mail_encryption" id="mail_encryption"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                                <option value="tls" {{ ($settings['mail_encryption'] ?? '') == 'tls' ? 'selected' : '' }}>TLS</option>
+                                <option value="ssl" {{ ($settings['mail_encryption'] ?? '') == 'ssl' ? 'selected' : '' }}>SSL</option>
+                                <option value="" {{ ($settings['mail_encryption'] ?? '') == '' ? 'selected' : '' }}>None</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="mail_from_address" class="block text-sm font-medium text-slate-700">From Address</label>
+                            <input type="email" name="mail_from_address" id="mail_from_address" value="{{ $settings['mail_from_address'] ?? '' }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                        <div>
+                            <label for="mail_from_name" class="block text-sm font-medium text-slate-700">From Name</label>
+                            <input type="text" name="mail_from_name" id="mail_from_name" value="{{ $settings['mail_from_name'] ?? config('app.name') }}"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/50 sm:text-sm border p-2">
+                        </div>
+                    </div>
+                    <div class="pt-4 flex justify-end">
+                        <button type="submit"
+                            class="save-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">Save Email Settings</button>
                     </div>
                 </form>
             </div>

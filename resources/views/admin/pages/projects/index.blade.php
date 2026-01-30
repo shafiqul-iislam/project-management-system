@@ -18,6 +18,7 @@
                         <th class="px-6 py-4">Name</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4">Timeline</th>
+                        <th class="px-6 py-4">Assigned To</th>
                         <th class="px-6 py-4">Created By</th>
                         <th class="px-6 py-4 text-right">Actions</th>
                     </tr>
@@ -48,14 +49,28 @@
                             <div><span class="font-medium">Ends:</span> {{ $project->ended_at }}</div>
                         </td>
                         <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-1">
+                                @forelse($project->developers as $developer)
+                                    <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200/50">
+                                        {{ $developer->name }}
+                                    </span>
+                                @empty
+                                    <span class="text-xs text-slate-400 italic">Unassigned</span>
+                                @endforelse
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
                             {{ $project->created_by_username ?? 'Unknown' }}
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex justify-end gap-2">
-                                <a href="{{ route('admin.projects.edit', $project) }}" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Edit">
-                                    <i class="ri-pencil-line text-lg"></i>
-                                </a>
                                 <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                    <a href="{{ route('admin.projects.edit', $project) }}" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Edit">
+                                        <i class="ri-pencil-line text-lg"></i>
+                                    </a>
+                                    <a href="{{ route('admin.project.assign-to', $project->id) }}" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Assign">
+                                        <i class="ri-user-add-line text-lg"></i>
+                                    </a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="p-2 delete_btn rounded-lg text-slate-600 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">
@@ -80,5 +95,7 @@
         </div>
     </div>
 
+    <!-- @push('scripts') -->
     @vite('resources/js/projects.js')
+    <!-- @endpush -->
 </x-admin-layout>

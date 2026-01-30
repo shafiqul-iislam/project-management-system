@@ -17,7 +17,7 @@
                 <!-- Name -->
                 <div class="col-span-2">
                     <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Project Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" placeholder="e.g. Website Redesign" required>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200" placeholder="e.g. Website Redesign" required>
                     @error('name')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
@@ -26,7 +26,7 @@
                 <!-- Status -->
                 <div>
                     <label for="status" class="block text-sm font-medium text-slate-700 mb-1">Status <span class="text-red-500">*</span></label>
-                    <select name="status" id="status" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" required>
+                    <select name="status" id="status" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200" required>
                         <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="in_progress" {{ old('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
                         <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
@@ -37,10 +37,27 @@
                     @enderror
                 </div>
 
+                <!-- assigned to
+                <div>
+                    <label for="assigned_to" class="block text-sm font-medium text-slate-700 mb-1">Assigned To <span class="text-red-500">*</span></label>
+                    <select name="assigned_to" id="assigned_to" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200" required>
+                        <option value="">Select Developer</option>
+
+                        @if($developers->count() > 0)
+                        @foreach($developers as $developer)
+                        <option value="{{ $developer->id }}" {{ old('assigned_to') == $developer->id ? 'selected' : '' }}>{{ $developer->name }}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                    @error('assigned_to')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div> -->
+
                 <!-- Description -->
                 <div class="col-span-2">
                     <label for="description" class="block text-sm font-medium text-slate-700 mb-1">Description <span class="text-red-500">*</span></label>
-                    <textarea name="description" id="description" rows="4" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" placeholder="Describe the project..." required>{{ old('description') }}</textarea>
+                    <textarea name="description" id="description" rows="4" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200" placeholder="Describe the project..." required>{{ old('description') }}</textarea>
                     @error('description')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
@@ -49,7 +66,7 @@
                 <!-- Dates -->
                 <div>
                     <label for="started_at" class="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
-                    <input type="date" name="started_at" id="started_at" value="{{ old('started_at') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3">
+                    <input type="date" name="started_at" id="started_at" value="{{ old('started_at') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200">
                     @error('started_at')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
@@ -57,7 +74,7 @@
 
                 <div>
                     <label for="ended_at" class="block text-sm font-medium text-slate-700 mb-1">Deadline / End Date</label>
-                    <input type="date" name="ended_at" id="ended_at" value="{{ old('ended_at') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3">
+                    <input type="date" name="ended_at" id="ended_at" value="{{ old('ended_at') }}" class="w-full rounded-lg border-slate-200 text-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border border-slate-200">
                     @error('ended_at')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror

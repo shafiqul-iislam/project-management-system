@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_users', function (Blueprint $table) {
-           $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
+           $table->foreignIdFor(\App\Models\Developer::class)->constrained()->cascadeOnDelete();
            $table->foreignIdFor(\App\Models\Project::class)->constrained()->cascadeOnDelete();
            $table->timestamp('assigned_at')->nullable();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Developer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.projects.create');
+        $developers = Developer::select('id', 'name')->get();
+
+        return view('admin.pages.projects.create', compact('developers'));
     }
 
     /**
@@ -100,5 +103,23 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+    }
+
+    public function assignTo(Project $project)
+    {
+        $developers = Developer::all();
+        return view('admin.pages.projects.assign-to', compact('project', 'developers'));
+    }
+
+    public function assignToStore(Request $request, Project $project)
+    {
+        $validated = $request->validate([
+            'developer_ids' => 'required|array',
+            'developer_ids.*' => 'exists:developers,id',
+        ]);
+
+        $project->developers()->syncWithPivotValues($validated['developer_ids'], ['assigned_at' => now()]);
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project assigned successfully.');
     }
 }
