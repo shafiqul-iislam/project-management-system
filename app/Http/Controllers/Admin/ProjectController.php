@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Developer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\ProjectAssignedNotification;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -119,6 +120,13 @@ class ProjectController extends Controller
         ]);
 
         $project->developers()->syncWithPivotValues($validated['developer_ids'], ['assigned_at' => now()]);
+        
+
+        $developers = Developer::whereIn('id', $validated['developer_ids'])->get();
+        foreach ($developers as $developer) {
+            $developer->notify(new ProjectAssignedNotification($project));
+        }
+
 
         return redirect()->route('admin.projects.index')->with('success', 'Project assigned successfully.');
     }

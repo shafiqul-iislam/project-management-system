@@ -13,11 +13,56 @@
      </div>
 
      <div class="flex items-center gap-4">
-         <!-- Notifications -->
-         <button class="relative rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-primary transition-colors">
-             <i class="ri-notification-3-line text-xl"></i>
-             <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
-         </button>
+         @php
+         $notifications = auth()->user()->unreadNotifications;
+         @endphp
+
+         <div class="relative">
+             <button id="notification-button" class="relative rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-primary transition-colors focus:outline-none">
+                 <i class="ri-notification-3-line text-xl"></i>
+                 @if($notifications->count())
+                 <span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                 @endif
+             </button>
+
+             <!-- Notification Dropdown -->
+             <div id="notification-dropdown" class="absolute right-0 mt-2 w-80 origin-top-right rounded-lg bg-white py-2 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-50">
+                 <div class="px-4 py-2 border-b border-slate-100 flex justify-between items-center">
+                     <h3 class="font-semibold text-slate-700">Notifications</h3>
+                     @if($notifications->count())
+                     <span class="bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-full">{{ $notifications->count() }} New</span>
+                     @endif
+                 </div>
+
+                 <div class="max-h-64 overflow-y-auto">
+                     @forelse($notifications as $notification)
+                     <a href="#" class="block px-4 py-3 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-none">
+                         <div class="flex items-start gap-3">
+                             <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mt-0.5">
+                                 <i class="ri-information-line text-sm"></i>
+                             </div>
+                             <div>
+                                 <p class="text-sm text-slate-700">{{ $notification->data['message'] ?? 'New Notification' }}</p>
+                                 <p class="text-xs text-slate-400 mt-1">{{ $notification->created_at->diffForHumans() }}</p>
+                             </div>
+                         </div>
+                     </a>
+                     @empty
+                     <div class="px-4 py-6 text-center text-slate-500">
+                         <p class="text-sm">No new notifications</p>
+                     </div>
+                     @endforelse
+                 </div>
+
+                 @if($notifications->count())
+                 <div class="border-t border-slate-100 mt-1 pt-1">
+                     <a href="#" class="block px-4 py-2 text-xs font-medium text-center text-primary hover:text-primary-dark">
+                         View all notifications
+                     </a>
+                 </div>
+                 @endif
+             </div>
+         </div>
 
          <!-- User Profile -->
          <div class="relative">
@@ -42,3 +87,44 @@
          </div>
      </div>
  </header>
+
+ @push('scripts')
+ <script>
+     $(document).ready(function() {
+         // Notification Dropdown
+         const notificationBtn = $('#notification-button');
+         const notificationDropdown = $('#notification-dropdown');
+
+         notificationBtn.on('click', function(e) {
+             e.stopPropagation();
+             notificationDropdown.toggleClass('hidden');
+             // Close user dropdown if open
+             $('#user-dropdown').addClass('hidden');
+         });
+
+         // User Dropdown (existing logic usually handles this, but ensuring they don't overlap)
+         const userBtn = $('#user-menu-button');
+         const userDropdown = $('#user-dropdown');
+
+         userBtn.on('click', function(e) {
+             e.stopPropagation();
+             userDropdown.toggleClass('hidden');
+             // Close notification dropdown if open
+             notificationDropdown.addClass('hidden');
+         });
+
+         // Close dropdowns when clicking outside
+         $(document).on('click', function(e) {
+             if (!notificationBtn.is(e.target) && notificationBtn.has(e.target).length === 0 &&
+                 !notificationDropdown.is(e.target) && notificationDropdown.has(e.target).length === 0) {
+                 notificationDropdown.addClass('hidden');
+             }
+
+             if (!userBtn.is(e.target) && userBtn.has(e.target).length === 0 &&
+                 !userDropdown.is(e.target) && userDropdown.has(e.target).length === 0) {
+                 userDropdown.addClass('hidden');
+             }
+         });
+     });
+ </script>
+ @endpush
