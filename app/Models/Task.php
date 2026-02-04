@@ -11,27 +11,29 @@ class Task extends Model
         'slug',
         'description',
         'project_id',
+        'developer_id',
         'status',
         'priority',
-        'order',
-        'deadline',
-        'completed_at',
     ];
 
     protected $casts = [
-        'deadline' => 'datetime',
-        'completed_at' => 'datetime',
-        'order' => 'integer',
         'permissions' => 'array',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($task) {
+            $task->slug = \Illuminate\Support\Str::slug($task->title) . '-' . \Illuminate\Support\Str::random(6);
+        });
+    }
 
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function users()
+    public function developer()
     {
-        return $this->belongsToMany(User::class, 'task_users', 'task_id', 'user_id')->withTimestamps();
+        return $this->belongsTo(Developer::class);
     }
 }

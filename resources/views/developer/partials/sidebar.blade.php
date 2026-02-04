@@ -1,0 +1,18 @@
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 left-0 z-50 h-screen w-64 transform bg-white transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0 border-r border-slate-200 shadow-sm">
+    <div class="flex h-16 items-center justify-center border-b border-slate-200 px-6">
+        <div class="flex items-center gap-2 font-bold text-xl text-primary">
+            <i class="ri-dashboard-3-line text-2xl"></i>
+            <span>Developer Panel</span>
+        </div>
+    </div>
+
+    <nav class="px-4 py-6 space-y-1 overflow-y-auto h-[calc(100vh-4rem)]">
+        <p class="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Menu</p>
+
+        <a href="{{ route('projects.index') }}" class="flex items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-primary transition-colors">
+            <i class="ri-home-5-line text-xl"></i>
+            <span class="font-medium">Projects</span>
+        </a>
+    </nav>
+</aside>

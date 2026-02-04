@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Modern Admin Dashboard</title>
+    <title>Login - Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -40,11 +40,12 @@
                     class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4">
                     <i class="ri-dashboard-3-line text-2xl"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900">Welcome Back</h2>
+                <h2 class="text-2xl font-bold text-slate-900">Welcome Back, Developer</h2>
                 <p class="text-slate-500 text-sm mt-1">Sign in to access your dashboard</p>
             </div>
 
-            <form id="login-form" class="space-y-6">
+            <form method="POST" action="{{ route('login.store') }}" class="space-y-6">
+                @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
                     <div class="relative">
@@ -116,12 +117,10 @@
 
             <p class="mt-8 text-center text-sm text-slate-500">
                 Don't have an account?
-                <a href="signup.html" class="font-medium text-primary hover:text-primary/80 transition-colors">Sign up for free</a>
+                <a href="/register" class="font-medium text-primary hover:text-primary/80 transition-colors">Sign up for free</a>
             </p>
         </div>
     </div>
-
-    <script src="js/auth/auth.js"></script>
 </body>
 
 </html>

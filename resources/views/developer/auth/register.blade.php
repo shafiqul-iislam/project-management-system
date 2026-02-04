@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Modern Admin Dashboard</title>
+    <title>Sign Up - Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -38,20 +38,33 @@
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4">
                     <i class="ri-user-add-line text-2xl"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900">Create Account</h2>
+                <h2 class="text-2xl font-bold text-slate-900">Create Developer Account</h2>
                 <p class="text-slate-500 text-sm mt-1">Join us and start managing your projects</p>
             </div>
 
-            <form id="signup-form" class="space-y-5">
+            <form action="{{ route('register.store') }}" method="POST" class="space-y-5">
+                @csrf
                 <div>
-                    <label for="fullname" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="ri-user-line text-slate-400"></i>
                         </div>
-                        <input type="text" id="fullname" name="fullname" required
+                        <input type="text" id="name" name="name" required
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
                             placeholder="John Doe">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="username" class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-user-star-line text-slate-400"></i>
+                        </div>
+                        <input type="text" id="username" name="username" required
+                            class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
+                            placeholder="johndoe">
                     </div>
                 </div>
 
@@ -64,6 +77,18 @@
                         <input type="email" id="email" name="email" required
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
                             placeholder="name@company.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-phone-line text-slate-400"></i>
+                        </div>
+                        <input type="tel" id="phone" name="phone" required
+                            class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all outline-none"
+                            placeholder="+1 (555) 000-0000">
                     </div>
                 </div>
 
@@ -108,13 +133,10 @@
 
             <p class="mt-8 text-center text-sm text-slate-500">
                 Already have an account?
-                <a href="login.html" class="font-medium text-primary hover:text-primary/80 transition-colors">Sign in</a>
+                <a href="/" class="font-medium text-primary hover:text-primary/80 transition-colors">Sign in</a>
             </p>
         </div>
     </div>
-
-    <script src="js/auth/auth.js"></script>
 </body>
-
 
 </html>

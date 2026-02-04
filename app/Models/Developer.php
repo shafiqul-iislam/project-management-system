@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Developer extends Model
+class Developer extends Authenticatable
 {
     use HasFactory;
 
@@ -21,4 +20,14 @@ class Developer extends Model
         'address',
         'status',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_users', 'developer_id', 'project_id');
+    }
 }

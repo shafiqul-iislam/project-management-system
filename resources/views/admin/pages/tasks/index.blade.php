@@ -15,9 +15,11 @@
                         <tr>
                             <th class="px-6 py-4 font-semibold text-slate-700">Task Title</th>
                             <th class="px-6 py-4 font-semibold text-slate-700">Project</th>
+                            <th class="px-6 py-4 font-semibold text-slate-700">Developer</th>
                             <th class="px-6 py-4 font-semibold text-slate-700">Priority</th>
                             <th class="px-6 py-4 font-semibold text-slate-700">Status</th>
-                            <th class="px-6 py-4 font-semibold text-slate-700">Deadline</th>
+                            <th class="px-6 py-4 font-semibold text-slate-700">Created At</th>
+                            <th class="px-6 py-4 font-semibold text-slate-700">Updated At</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -31,6 +33,13 @@
                                 <span class="text-primary font-medium">{{ $task->project->name }}</span>
                                 @else
                                 <span class="text-slate-400 italic">No Project</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                @if($task->developer)
+                                <span class="text-primary font-medium">{{ $task->developer->name }}</span>
+                                @else
+                                <span class="text-slate-400 italic">No Developer</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4">
@@ -55,18 +64,12 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4">
-                                @if($task->deadline)
-                                <div class="flex items-center gap-1 {{ $task->deadline->isPast() && $task->status !== 'completed' ? 'text-red-600 font-medium' : 'text-slate-600' }}">
-                                    @if($task->deadline->isPast() && $task->status !== 'completed')
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    @endif
-                                    {{ $task->deadline->format('M d, Y') }}
-                                </div>
-                                @else
-                                <span class="text-slate-400">-</span>
-                                @endif
+                                <div class="text-slate-900 font-medium">{{ $task->created_at->format('M d, Y') }}</div>
+                                <div class="text-xs text-slate-500">{{ $task->created_at->diffForHumans() }}</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-slate-900 font-medium">{{ $task->updated_at->format('M d, Y') }}</div>
+                                <div class="text-xs text-slate-500">{{ $task->updated_at->diffForHumans() }}</div>
                             </td>
                         </tr>
                         @empty
