@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\ProjectStatusEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
-            $table->enum('status', ['pending', 'in_progress', 'completed', 'active'])->default('pending');
+            $table->enum('status', ProjectStatusEnum::values())->default(ProjectStatusEnum::PENDING->value);
             $table->date('started_at')->nullable();
             $table->date('ended_at')->nullable();
             $table->date('finished_at')->nullable();

@@ -18,8 +18,6 @@ class Role extends Model
         'permissions' => 'array',
     ];
 
-    protected $guarded = [];
-
     public function users()
     {
         return $this->hasMany(User::class);

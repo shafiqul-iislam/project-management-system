@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\TaskStatusEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->foreignIdFor(\App\Models\Project::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(\App\Models\Developer::class, 'developer_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['todo', 'in_progress', 'completed', 'cancelled'])->default('todo');
+            $table->enum('status', TaskStatusEnum::values())->default(TaskStatusEnum::TODO->value);
             $table->enum('priority', ['low', 'medium', 'high'])->default('low');
             $table->timestamps();
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TaskStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -17,7 +18,7 @@ class Task extends Model
     ];
 
     protected $casts = [
-        'permissions' => 'array',
+        'status' => TaskStatusEnum::class,
     ];
 
     protected static function booted()

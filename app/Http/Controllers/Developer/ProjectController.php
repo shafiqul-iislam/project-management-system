@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Developer;
 
+use App\Models\Task;
+use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectUser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Notifications\TaskAddedNotification;
 
 class ProjectController extends Controller
 {
@@ -20,7 +25,7 @@ class ProjectController extends Controller
         return view('developer.pages.projects.tasks', compact('project'));
     }
 
-    public function storeTask(\Illuminate\Http\Request $request, Project $project)
+    public function storeTask(Request $request, Project $project)
     {
         $request->validate([
             'title' => 'required',
@@ -28,18 +33,29 @@ class ProjectController extends Controller
             'priority' => 'required',
         ]);
 
-        $project->tasks()->create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status,
-            'priority' => $request->priority,
-            'developer_id' => auth('developer')->id(),
-        ]);
+        DB::beginTransaction();
+        try {
+            $task = $project->tasks()->create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'status' => $request->status,
+                'priority' => $request->priority,
+                'developer_id' => auth('developer')->id(),
+            ]);
+
+            $admin = User::first(); // Assuming the admin is the first user
+            $admin->notify(new TaskAddedNotification($task));
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Failed to create task: ' . $e->getMessage());
+        }
 
         return back()->with('success', 'Task created successfully');
     }
 
-    public function updateTask(\Illuminate\Http\Request $request, Project $project, \App\Models\Task $task)
+    public function updateTask(Request $request, Task $task)
     {
         $request->validate([
             'title' => 'required',

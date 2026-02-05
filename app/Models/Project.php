@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ProjectStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -15,6 +16,10 @@ class Project extends Model
         'ended_at',
         'finished_at',
         'created_by_username',
+    ];
+
+    protected $casts = [
+        'status' => ProjectStatusEnum::class,
     ];
 
     public function developers()

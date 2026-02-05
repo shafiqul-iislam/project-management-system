@@ -34,17 +34,8 @@
                             <div class="text-xs text-slate-500 truncate max-w-xs">{{ Str::limit($task->description, 50) }}</div>
                         </td>
                         <td class="px-6 py-4">
-                            @php
-                            $statusColors = [
-                            'todo' => 'bg-yellow-100 text-yellow-700',
-                            'in_progress' => 'bg-blue-100 text-blue-700',
-                            'completed' => 'bg-green-100 text-green-700',
-                            'cancelled' => 'bg-red-100 text-red-700',
-                            ];
-                            $color = $statusColors[$task->status] ?? 'bg-gray-100 text-gray-700';
-                            @endphp
-                            <span class="inline-block px-2 py-1 rounded text-xs font-medium {{ $color }}">
-                                {{ ucfirst(str_replace('_', ' ', $task->status)) }}
+                            <span class="inline-block px-2 py-1 rounded text-xs font-medium {{ $task->status->color() }}">
+                                {{ $task->status->label() }}
                             </span>
                         </td>
                         <td class="px-6 py-4">
