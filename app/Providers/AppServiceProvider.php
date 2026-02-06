@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use App\Events\UserRegistered;
+use App\Listeners\SendWelcomeEmail;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
+
+        Event::listen(UserRegistered::class, SendWelcomeEmail::class);
 
         Blade::component('admin-layout', \App\View\Components\AdminLayout::class);
         Blade::component('developer-layout', \App\View\Components\DeveloperLayout::class);

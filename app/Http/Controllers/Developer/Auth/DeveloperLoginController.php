@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Developer\Auth;
 
 use App\Models\Developer;
 use Illuminate\Http\Request;
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -61,6 +62,8 @@ class DeveloperLoginController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
+
+        event(new UserRegistered($developer));
 
         return redirect()->route('login')->with('success', 'Developer registered successfully');
     }
