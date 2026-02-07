@@ -35,26 +35,6 @@ class SettingsController extends Controller
 
     public function updateSystemSettings(Request $request)
     {
-        // Example system settings
-        $request->validate([
-            // Add validations if any fields are added later
-        ]);
-
-        // Logic for system settings (e.g. password, but usually password is User related, not system wide?)
-        // The user's view has password reset here, which is weird for "System Settings".
-        // Password reset should be handled by a ProfileController, not SystemSettings.
-        // However, the view says "System Settings" then shows Password.
-        // If this is global system settings, maybe it shouldn't have password.
-        // But since I'm implementing what the USER provided in the view earlier, I should check the view again.
-        // View has "Current Password", "New Password". This is definitely User Profile stuff.
-        // I will implement a separate updatePassword method for this if it's for the logged in admin.
-
-        // For now, let's assume the user might want to add other system settings here later.
-        // I'll leave this empty or handle any actual system settings if added.
-
-        // Wait, looking at the view (step 136), "Security Settings" (renamed to System) has Password fields.
-        // If this is for the ADMIN USER, it should update $request->user()->password.
-
         if ($request->filled('current_password')) {
             $request->validate([
                 'current_password' => 'required|current_password',

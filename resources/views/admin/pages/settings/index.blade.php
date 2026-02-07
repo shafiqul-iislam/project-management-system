@@ -226,7 +226,6 @@
                                 class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
                         </div>
                     </div>
-
                     <div class="pt-4 flex justify-end">
                         <button type="submit"
                             class="save-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
@@ -234,9 +233,7 @@
                         </button>
                     </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 
