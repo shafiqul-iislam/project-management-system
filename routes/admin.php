@@ -36,4 +36,5 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::post('settings/general', [SettingsController::class, 'updateGeneralSettings'])->name('settings.general');
     Route::post('settings/system', [SettingsController::class, 'updateSystemSettings'])->name('settings.system');
     Route::post('settings/email', [SettingsController::class, 'updateEmailSettings'])->name('settings.email');
+    Route::post('settings/notifications', [SettingsController::class, 'updateNotificationSettings'])->name('settings.notifications');
 });

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -96,5 +95,19 @@ class SettingsController extends Controller
         }
 
         return back()->with('success', 'Email settings updated successfully.');
+    }
+
+    public function updateNotificationSettings(Request $request)
+    {
+        $data = $request->validate([
+            'push_notifications' => 'nullable|boolean',
+            'email_notifications' => 'nullable|boolean',
+        ]);
+
+        foreach ($data as $key => $value) {
+            Setting::set($key, $value, 'notification');
+        }
+
+        return back()->with('success', 'Notification settings updated successfully.');
     }
 }

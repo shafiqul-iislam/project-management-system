@@ -184,37 +184,57 @@
             <!-- Notifications Settings -->
             <div id="notifications-tab" class="tab-content hidden space-y-6">
                 <h2 class="text-lg font-medium text-slate-900">Notification Preferences</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-sm font-medium text-slate-900">Email Notifications</h3>
-                            <p class="text-sm text-slate-500">Receive emails about your account activity.</p>
+                <form action="{{ route('admin.settings.notifications') }}" method="POST">
+                    @csrf
+
+                    <div class="space-y-4">
+                        <!-- Email -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-900">Email Notifications</h3>
+                                <p class="text-sm text-slate-500">Receive emails about your account activity.</p>
+                            </div>
+
+                            <!-- hidden fallback -->
+                            <input type="hidden" name="email_notifications" value="0">
+
+                            <input
+                                type="checkbox"
+                                name="email_notifications"
+                                id="email_notifications"
+                                value="1"
+                                {{ $settings['email_notifications'] ? 'checked' : '' }}
+                                class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
                         </div>
-                        <input type="checkbox" checked
-                            class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-sm font-medium text-slate-900">Push Notifications</h3>
-                            <p class="text-sm text-slate-500">Receive push notifications on your device.</p>
+
+                        <!-- Push -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-900">Push Notifications</h3>
+                                <p class="text-sm text-slate-500">Receive push notifications on your device.</p>
+                            </div>
+
+                            <!-- hidden fallback -->
+                            <input type="hidden" name="push_notifications" value="0">
+
+                            <input
+                                type="checkbox"
+                                name="push_notifications"
+                                id="push_notifications"
+                                value="1"
+                                {{ $settings['push_notifications'] ? 'checked' : '' }}
+                                class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
                         </div>
-                        <input type="checkbox"
-                            class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
                     </div>
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-sm font-medium text-slate-900">Weekly Digest</h3>
-                            <p class="text-sm text-slate-500">Receive a weekly summary of your projects.</p>
-                        </div>
-                        <input type="checkbox" checked
-                            class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary">
+
+                    <div class="pt-4 flex justify-end">
+                        <button type="submit"
+                            class="save-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                            Save Preferences
+                        </button>
                     </div>
-                </div>
-                <div class="pt-4 flex justify-end">
-                    <button
-                        class="save-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">Save
-                        Preferences</button>
-                </div>
+                </form>
+
             </div>
 
         </div>
