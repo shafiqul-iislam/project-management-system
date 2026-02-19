@@ -163,7 +163,7 @@
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
-                <form id="editTaskForm" method="POST">
+                <form action="{{ route('projects.tasks.update') }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -174,6 +174,7 @@
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Edit Task</h3>
                                 <div class="mt-4 space-y-4">
+                                    <input type="hidden" name="task_id" id="edit_id">
                                     <div>
                                         <label for="edit_title" class="block text-sm font-medium text-gray-700">Title</label>
                                         <input type="text" name="title" id="edit_title" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
@@ -222,50 +223,6 @@
     </div>
 
     @push('scripts')
-    <script>
-        $(document).ready(function() {
-            // Open Modal
-            $('#createTaskBtn').click(function() {
-                $('#createTaskModal').removeClass('hidden');
-            });
-
-            // Close Modal (Button)
-            $('#closeModal').click(function() {
-                $('#createTaskModal').addClass('hidden');
-            });
-
-            // Close Modal (Overlay)
-            $('#modalOverlay').click(function() {
-                $('#createTaskModal').addClass('hidden');
-            });
-
-            // Edit Modal Open
-            $('.editTaskBtn').click(function() {
-                let id = $(this).data('id');
-                let title = $(this).data('title');
-                let description = $(this).data('description');
-                let status = $(this).data('status');
-                let priority = $(this).data('priority');
-
-                // Set form action
-                let updateUrl = "{{ route('projects.tasks.update', [$project->id, ':id']) }}";
-                updateUrl = updateUrl.replace(':id', id);
-                $('#editTaskForm').attr('action', updateUrl);
-
-                // Populate Inputs
-                $('#edit_title').val(title);
-                $('#edit_description').val(description);
-                $('#edit_status').val(status);
-                $('#edit_priority').val(priority);
-
-                $('#editTaskModal').removeClass('hidden');
-            });
-
-            // Close Edit Modal
-            $('#closeEditModal, #editModalOverlay').click(function() {
-                $('#editTaskModal').addClass('hidden');
-            });
-        });
-    </script>
+    @vite('resources/js/tasks.js')
     @endpush
 </x-developer-layout>

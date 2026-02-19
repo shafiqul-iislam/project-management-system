@@ -18,7 +18,7 @@ Route::middleware('auth:developer')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/{project}/tasks', [ProjectController::class, 'tasks'])->name('projects.tasks');
     Route::post('/projects/{project}/tasks', [ProjectController::class, 'storeTask'])->name('projects.tasks.store');
-    Route::put('/projects/{project}/tasks/{task}', [ProjectController::class, 'updateTask'])->name('projects.tasks.update');
+    Route::put('/projects/tasks/update', [ProjectController::class, 'updateTask'])->name('projects.tasks.update');
 
     // Profile Routes
     Route::get('/profile', [\App\Http\Controllers\Developer\ProfileController::class, 'index'])->name('profile');

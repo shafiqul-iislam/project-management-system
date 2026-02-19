@@ -55,13 +55,16 @@ class ProjectController extends Controller
         return back()->with('success', 'Task created successfully');
     }
 
-    public function updateTask(Request $request, Task $task)
+    public function updateTask(Request $request)
     {
         $request->validate([
+            'task_id' => 'required',
             'title' => 'required',
             'status' => 'required',
             'priority' => 'required',
         ]);
+
+        $task = Task::find($request->task_id);
 
         $task->update([
             'title' => $request->title,

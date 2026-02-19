@@ -237,5 +237,7 @@
         </div>
     </div>
 
+    @push('scripts')
     @vite('resources/js/settings.js')
+    @endpush
 </x-admin-layout>

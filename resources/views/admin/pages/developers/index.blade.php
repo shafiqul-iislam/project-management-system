@@ -101,6 +101,4 @@
         </div>
         @endif
     </div>
-
-    @vite('resources/js/developers.js')
 </x-admin-layout>

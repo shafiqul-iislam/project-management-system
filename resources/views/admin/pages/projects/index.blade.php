@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <!-- @push('scripts') -->
+    @push('scripts')
     @vite('resources/js/projects.js')
-    <!-- @endpush -->
+    @endpush
 </x-admin-layout>

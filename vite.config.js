@@ -8,7 +8,11 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/style.css',
                 'resources/js/app.js',
-                'resources/js/script.js'
+                'resources/js/script.js',
+                'resources/js/tasks.js',
+                'resources/js/projects.js',
+                'resources/js/settings.js',
+                'resources/js/dashboard.js',
             ],
             refresh: true,
         }),

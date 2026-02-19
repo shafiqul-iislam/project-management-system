@@ -118,8 +118,9 @@
         </div>
     </div>
 
-    <script src="js/auth/auth.js"></script>
+    @push('scripts')
+    @vite('resources/js/auth.js')
+    @endpush
 </body>
-
 
 </html>
